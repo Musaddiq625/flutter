@@ -71,6 +71,8 @@ class Card extends StatelessWidget {
     this.shape,
     this.borderOnForeground = true,
     this.margin,
+    this.height,
+    this.width,
     this.clipBehavior,
     this.child,
     this.semanticContainer = true,
@@ -90,6 +92,8 @@ class Card extends StatelessWidget {
     this.shape,
     this.borderOnForeground = true,
     this.margin,
+    this.height,
+    this.width,
     this.clipBehavior,
     this.child,
     this.semanticContainer = true,
@@ -109,6 +113,8 @@ class Card extends StatelessWidget {
     this.shape,
     this.borderOnForeground = true,
     this.margin,
+    this.height,
+    this.width,
     this.clipBehavior,
     this.child,
     this.semanticContainer = true,
@@ -188,6 +194,12 @@ class Card extends StatelessWidget {
   /// logical pixels on all sides: `EdgeInsets.all(4.0)`.
   final EdgeInsetsGeometry? margin;
 
+  /// The height of the card.
+  final double? height;
+
+  /// The width of the card.
+  final double? width;
+
   /// Whether this widget represents a single semantic container, or if false
   /// a collection of individual semantic nodes.
   ///
@@ -226,6 +238,8 @@ class Card extends StatelessWidget {
       container: semanticContainer,
       child: Container(
         margin: margin ?? cardTheme.margin ?? defaults.margin!,
+        height: height,
+        width: width,
         child: Material(
           type: MaterialType.card,
           color: color ?? cardTheme.color ?? defaults.color,
