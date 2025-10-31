@@ -21,7 +21,6 @@ import 'debug.dart';
 import 'ink_well.dart';
 import 'material.dart';
 import 'material_localizations.dart';
-import 'material_state.dart';
 import 'tab_bar_theme.dart';
 import 'tab_controller.dart';
 import 'tab_indicator.dart';
@@ -1613,7 +1612,6 @@ class _TabBarState extends State<TabBar> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    assert(debugCheckHasMaterial(context));
     _updateTabController();
     _initIndicatorPainter();
   }
@@ -1932,7 +1930,7 @@ class _TabBarState extends State<TabBar> {
       final MouseCursor effectiveMouseCursor =
           WidgetStateProperty.resolveAs<MouseCursor?>(widget.mouseCursor, selectedState) ??
           tabBarTheme.mouseCursor?.resolve(selectedState) ??
-          MaterialStateMouseCursor.clickable.resolve(selectedState);
+          WidgetStateMouseCursor.clickable.resolve(selectedState);
 
       final WidgetStateProperty<Color?> defaultOverlay = WidgetStateProperty.resolveWith<Color?>((
         Set<WidgetState> states,
@@ -2056,11 +2054,14 @@ class _TabBarState extends State<TabBar> {
       tabBar = Padding(padding: widget.padding!, child: tabBar);
     }
 
-    return MediaQuery(
-      data: MediaQuery.of(
-        context,
-      ).copyWith(textScaler: widget.textScaler ?? tabBarTheme.textScaler),
-      child: tabBar,
+    return Material(
+      type: MaterialType.transparency,
+      child: MediaQuery(
+        data: MediaQuery.of(
+          context,
+        ).copyWith(textScaler: widget.textScaler ?? tabBarTheme.textScaler),
+        child: tabBar,
+      ),
     );
   }
 }

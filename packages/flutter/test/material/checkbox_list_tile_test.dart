@@ -592,7 +592,7 @@ void main() {
 
     expect(
       RendererBinding.instance.mouseTracker.debugDeviceActiveCursor(1),
-      SystemMouseCursors.click,
+      kIsWeb ? SystemMouseCursors.click : SystemMouseCursors.basic,
     );
 
     // Test default cursor when disabled
@@ -1845,7 +1845,7 @@ void main() {
   });
 }
 
-class _SelectedGrabMouseCursor extends MaterialStateMouseCursor {
+class _SelectedGrabMouseCursor extends WidgetStateMouseCursor {
   const _SelectedGrabMouseCursor();
 
   @override
